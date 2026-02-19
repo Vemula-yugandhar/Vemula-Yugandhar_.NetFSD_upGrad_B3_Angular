@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discount Amount</title>
+    <style>
+       .discount {
+           border: solid;
+           border-color: black;
+           border-width: 2px;
+           padding: 20px;
+           background-color: aqua;
+           label {
+                color: blue;
+                font-size: large;
+                background-color: burlywood;
+                padding: 10px;
+                border-radius: 7px;
+           } 
+           .amount {
+               font-size: larger;
+           }
+           .submit {
+            transition: transform(1.0);
+           }
+           .submit:hover {
+            background-color: black;
+            color: white;
+           }
+           .p1 {
+               color: red;
+               font-size: large;
+           }
+           .p2 {
+               color: green;
+               font-size: large;
+           }
+           
+       }
+    </style>
+</head>
+<body>
+    <h1>Discount Amounts....</h1>
+            <div class="discount">
+
+                <label>PURCHASE AMOUNT :</label>
+                <input type="number" id="amount" name="amount" class="amount" placeholder="Enter Amount" required>
+
+                <br><br><br><br>
+
+                <input type="button" onclick="discountCalculate()" value="Calculate_Discount" class="submit">
+                
+                <p id="p1" class="p1"></p>
+                <p id="p2" class="p2"></p>
+
+            </div>
+
+    <script>
+           function discountCalculate() {
+
+            let amount = document.getElementById("amount").value;
+
+            let discount_amount = document.getElementById("p1");
+            let discount;
+
+            let final_amount = document.getElementById("p2");
+            let final;
+
+            if (amount >= 5000) {
+
+                 discount = amount * 0.20 ;
+                 final = amount - discount;
+                 discount_amount.innerText = "Discount Amount: " + discount;
+                 final_amount.innerText = "Final Amount: " + final;
+            }
+            else if (amount >= 3000) {
+                   discount = amount * 0.10 ;
+                 final = amount - discount;
+                 discount_amount.innerText = "Discount Amount: " + discount;
+                 final_amount.innerText = "Final Amount: " + final;
+            }
+             else {
+                  final_amount.innerText = "No Discount";
+             }
+
+           }
+    </script>
+
+</body>
+</html>
