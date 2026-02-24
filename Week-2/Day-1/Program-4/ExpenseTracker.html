@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mini Expense Tracker</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        input { margin: 5px; padding: 5px; }
+        button { margin: 5px; padding: 5px 10px; }
+        table { margin-top: 20px; border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid black; padding: 8px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<h2>Mini Expense Tracker</h2>
+
+<input type="text" id="title" placeholder="Expense Title">
+<input type="number" id="amount" placeholder="Amount">
+<input type="date" id="date">
+
+<br>
+
+<button onclick="addExpense()">Add Expense</button>
+<button onclick="viewExpenses()">View Expenses</button>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="expenseList"></tbody>
+</table>
+
+<script>
+
+    // 1️⃣ Open Database
+    let db = openDatabase('ExpenseDB', '1.0', 'Expense Tracker DB', 2 * 1024 * 1024);
+
+    // 2️⃣ Create Table
+    db.transaction(function(tx) {
+        tx.executeSql(
+            "CREATE TABLE IF NOT EXISTS expenses (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, amount REAL, date TEXT)",
+            [],
+            function() {
+                console.log("Table Created Successfully");
+            },
+            function(tx, error) {
+                console.log("Table Creation Error: " + error.message);
+            }
+        );
+    });
+
+    // 3️⃣ Add Expense
+    function addExpense() {
+
+        let title = document.getElementById("title").value;
+        let amount = document.getElementById("amount").value;
+        let date = document.getElementById("date").value;
+
+        if(title === "" || amount === "" || date === "") {
+            alert("Please fill all fields");
+            return;
+        }
+
+        db.transaction(function(tx) {
+            tx.executeSql(
+                "INSERT INTO expenses (title, amount, date) VALUES (?, ?, ?)",
+                [title, amount, date],
+                function() {
+                    alert("Expense Added Successfully");
+                    viewExpenses();
+                },
+                function(tx, error) {
+                    alert("Insert Error: " + error.message);
+                }
+            );
+        });
+    }
+
+    // 4️⃣ View Expenses
+    function viewExpenses() {
+
+        db.transaction(function(tx) {
+            tx.executeSql(
+                "SELECT * FROM expenses",
+                [],
+                function(tx, results) {
+
+                    let list = document.getElementById("expenseList");
+                    list.innerHTML = "";
+
+                    for(let i = 0; i < results.rows.length; i++) {
+
+                        let row = results.rows.item(i);
+
+                        list.innerHTML += `
+                            <tr>
+                                <td>${row.id}</td>
+                                <td>${row.title}</td>
+                                <td>${row.amount}</td>
+                                <td>${row.date}</td>
+                                <td>
+                                    <button onclick="deleteExpense(${row.id})">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        `;
+                    }
+                },
+                function(tx, error) {
+                    alert("Select Error: " + error.message);
+                }
+            );
+        });
+    }
+
+    // 5️⃣ Delete Expense
+    function deleteExpense(id) {
+
+        db.transaction(function(tx) {
+            tx.executeSql(
+                "DELETE FROM expenses WHERE id = ?",
+                [id],
+                function() {
+                    alert("Expense Deleted");
+                    viewExpenses();
+                },
+                function(tx, error) {
+                    alert("Delete Error: " + error.message);
+                }
+            );
+        });
+    }
+
+</script>
+
+</body>
+</html>

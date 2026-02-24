@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #note {
+            margin: 20px;
+        }
+        textarea {
+            height: 200px;
+            width: 400px;
+            padding: 10px;
+            background-color: black;
+            color: white;
+        }
+        input {
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        input:hover {
+            background-color: skyblue;
+            color: white;
+        }
+        label {
+            font-size: large;
+        }
+    </style>
+</head>
+<body>
+    <div id="note">
+
+    <label><b>Enter Your Notes:</b></label>
+    <br><br>
+
+    <textarea id="info">
+    </textarea>
+
+    <br><br>
+
+    <input type="submit" value="Save" onclick="save()"/>
+     <input type="submit" value="Retrive" onclick="get()"/>
+    <input type="submit" value="Clear" onclick="remove()"/>
+    <p></p>
+
+    </div>
+
+
+    <script>
+       
+       function save() {
+
+       let str = document.getElementById("info");
+       localStorage.setItem("notes", str.value);
+       alert("User Data Stored")
+
+       }
+
+       function get() {
+        let note = localStorage.getItem("notes");
+        alert("User note : " + note)
+       }
+
+       function remove() {
+          
+        //localStorage.clear();
+        alert("Data Cleared")
+
+       }
+
+    </script>
+
+
+</body>
+</html>

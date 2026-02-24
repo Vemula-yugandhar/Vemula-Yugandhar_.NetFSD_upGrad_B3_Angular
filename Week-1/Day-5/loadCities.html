@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <h1>Generating Dynamic List</h1>
+        <hr/>
+        <input type="button" value="Load Cities"  onclick="loadCities()" />
+        <hr/>
+        <ul id="list1">
+        </ul>
+
+<script>
+        let citiesArray = ["Hyd", "Chennai", "Goa", "Kolkata", "Mumbai", "Pune"];
+
+        function loadCities() {
+        let newlist;
+        let list = document.getElementById("list1");
+        list.innerHTML = ""; //First clear the list
+        for(let city of citiesArray)
+        {
+            // code to add to list
+             newlist = document.createElement("li");
+             newlist.innerHTML = city;
+        
+             list.append(newlist);  
+        }
+    }
+</script>
+    
+</body>
+</html>
