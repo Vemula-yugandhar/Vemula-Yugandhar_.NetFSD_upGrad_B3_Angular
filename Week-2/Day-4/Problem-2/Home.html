@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Management System</title>
+</head>
+
+<body>
+    <h1>Vehicle Mangement System</h1>
+    <button onclick="get_Details()">Show Car Details</button>
+    <p id="p1"></p>
+    <p id="p2"></p>
+    <script>
+       class Vehicle {
+             brand = "BMW";
+             speed = "180km/hr"
+             displayInfo() {
+                console.log(`Brand: ${this.brand} Speed: ${this.speed}`)
+
+             }
+       }
+        class Car extends Vehicle {
+            fuel_Type = "Petrol";
+            showCarDetails() {
+              return `<b>Brand</b>: ${this.brand} <b>Speed</b>: ${this.speed} <b>Fuel Type:</b> ${this.fuel_Type}`;
+
+            }
+        }
+        function get_Details() {
+            let data = new Car();
+            document.getElementById("p1").innerHTML +=  data.showCarDetails();
+            data.displayInfo();
+        }
+    </script>
+</body>
+</html>

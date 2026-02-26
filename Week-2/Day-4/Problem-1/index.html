@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Student Grades</h1>
+    <button onclick="fetch_Student_Details()">Student Details</button>
+    <p id="p1"></p>
+    <p id="p2"></p>
+    <script>
+        class Student {
+            
+            constructor(name, rollNumber, marks) {
+                this.name = name;
+                this.rollNumber = rollNumber;
+                this.marks = marks;
+            }
+            getDetails() {
+                  return `<b>Name:</b> ${this.name} <b>Roll Number:</b> ${this.rollNumber} <b>Marks:</b> ${this.marks}`;
+            }
+            getGrade() {
+                  if(this.marks >= 90) {
+                   return "Grade A"
+                  }
+                  else if(this.marks > 75 && this.marks < 89)
+                  {
+                      return "Grade B"        
+                  }
+                  else if(this.marks > 50 && this.marks < 74) {
+                       return "Grade C"
+                  }  
+                  else {
+                   return "Fail"
+                  }
+            }
+        }
+        
+         function fetch_Student_Details() {
+            let grades = new Student("Yugandhar", 101, 90);
+            let paraobj  = document.getElementById("p1");
+            paraobj.innerHTML +=  grades.getDetails();
+
+            let paraobj2  = document.getElementById("p2");
+            paraobj2.innerHTML += "<b>Result:</b> "+ grades.getGrade();
+         } 
+
+    </script>
+
+</body>
+</html>
