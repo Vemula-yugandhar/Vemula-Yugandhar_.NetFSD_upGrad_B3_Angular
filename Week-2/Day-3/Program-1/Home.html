@@ -1,47 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Marks Analyzer</title>
+    <title>Weather Data Fetcher</title>
 </head>
 <body>
 
-    <h2>Student Marks Report</h2>
-    <div id="output"></div>
+<h2>Weather Data Fetcher</h2>
 
-    <script>
-        const marks = [75, 82, 90, 45, 68];
+<input type="text" id="city" placeholder="Enter City Name">
+<button onclick="getWeatherPromise()">Fetch (Promise)</button>
+<button onclick="getWeatherAsync()">Fetch (Async/Await)</button>
 
-        // Calculating Total
-        const calculateTotal = (marksArray) => 
-            marksArray.reduce((total, mark) => total + mark, 0);
+<pre id="output"></pre>
 
-        // Calculate Average
-        const calculateAverage = (marksArray) => 
-            calculateTotal(marksArray) / marksArray.length;
+<script>
+const output = document.getElementById("output")
 
-        // Determine pass or fail
-        const getResult = (average) => 
-            average >= 50 ? "Pass ✅" : "Fail ❌";
+const getCoordinates = (city) => {
+    const url = `https://geocoding-api.open-meteo.com/v1/search?name=${city}`
+    return fetch(url)
+        .then(res => {
+            if (!res.ok) throw new Error("City not found")
+            return res.json()
+        })
+        .then(data => {
+            if (!data.results) throw new Error("Invalid city name")
+            return data.results[0]
+        })
+}
 
-        // Main function
-        const analyzeMarks = () => {
-            const total = calculateTotal(marks);
-            const average = calculateAverage(marks);
-            const result = getResult(average);
+const getWeather = (lat, lon) => {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`
+    return fetch(url)
+        .then(res => {
+            if (!res.ok) throw new Error("Weather fetch failed")
+            return res.json()
+        })
+}
 
-            const outputDiv = document.getElementById("output");
-            outputDiv.innerHTML = `
-                <p><strong>Marks:</strong> ${marks.join(", ")}</p>
-                <p><strong>Total:</strong> ${total}</p>
-                <p><strong>Average:</strong> ${average.toFixed(2)}</p>
-                <p><strong>Result:</strong> ${result}</p>
-            `;
-        };
+const formatReport = (city, weather) => `
+Weather Report for ${city}
+Temperature: ${weather.temperature}°C
+Wind Speed: ${weather.windspeed} km/h
+Time: ${weather.time}
+`
 
-        analyzeMarks();
-    </script>
+const getWeatherPromise = () => {
+    const city = document.getElementById("city").value
+    output.textContent = "Loading..."
+
+    getCoordinates(city)
+        .then(loc => getWeather(loc.latitude, loc.longitude)
+            .then(data => formatReport(loc.name, data.current_weather))
+        )
+        .then(report => output.textContent = report)
+        .catch(err => output.textContent = `Error: ${err.message}`)
+}
+
+const getWeatherAsync = async () => {
+    try {
+        const city = document.getElementById("city").value
+        output.textContent = "Loading..."
+
+        const loc = await getCoordinates(city)
+        const data = await getWeather(loc.latitude, loc.longitude)
+
+        output.textContent = formatReport(loc.name, data.current_weather)
+    } catch (err) {
+        output.textContent = `Error: ${err.message}`
+    }
+}
+</script>
 
 </body>
 </html>

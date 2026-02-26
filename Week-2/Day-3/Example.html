@@ -1,118 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Task Manager - Async Evolution</title>
+    <title>Dynamic To-Do List</title>
+    <style>
+        body { font-family: Arial; margin: 50px; }
+        li { margin: 10px 0; }
+        .completed { text-decoration: line-through; color: gray; }
+        button { margin-left: 10px; }
+    </style>
 </head>
 <body>
 
-    <h2>📝 Task Manager (Callback → Promise → Async/Await)</h2>
-    <div id="output"></div>
+<h2>To-Do List</h2>
 
-    <script>
-        // ===============================
-        // Simulated Async Storage
-        // ===============================
-        let tasks = [];
-        const output = document.getElementById("output");
+<input type="text" id="taskInput" placeholder="Enter task">
+<button id="addBtn">Add Task</button>
 
-        // ===============================
-        // 1️⃣ Callback Version
-        // ===============================
-        const addTaskCallback = (task, callback) => {
-            setTimeout(() => {
-                tasks.push(task);
-                callback(`✔ Task "${task}" added (Callback).`);
-            }, 1000);
-        };
+<ul id="taskList"></ul>
 
-        const listTasksCallback = (callback) => {
-            setTimeout(() => {
-                callback(`
---- Task List (Callback) ---
-${tasks.map((t, i) => `${i + 1}. ${t}`).join("<br>")}
------------------------------
-                `);
-            }, 1000);
-        };
+<script>
+const taskInput = document.getElementById("taskInput")
+const addBtn = document.getElementById("addBtn")
+const taskList = document.getElementById("taskList")
 
-        // ===============================
-        // 2️⃣ Promise Version
-        // ===============================
-        const addTaskPromise = (task) =>
-            new Promise((resolve) => {
-                setTimeout(() => {
-                    tasks.push(task);
-                    resolve(`✔ Task "${task}" added (Promise).`);
-                }, 1000);
-            });
+const createTaskElement = (task) => {
+    const li = document.createElement("li")
+    li.innerHTML = `
+        <span class="task-text">${task}</span>
+        <button data-action="complete">✔</button>
+        <button data-action="delete">❌</button>
+    `
+    return li
+}
 
-        const deleteTaskPromise = (task) =>
-            new Promise((resolve) => {
-                setTimeout(() => {
-                    tasks = tasks.filter(t => t !== task);
-                    resolve(`❌ Task "${task}" deleted (Promise).`);
-                }, 1000);
-            });
+const addTask = () => {
+    const task = taskInput.value.trim()
+    if (!task) return
+    const li = createTaskElement(task)
+    taskList.appendChild(li)
+    taskInput.value = ""
+}
 
-        const listTasksPromise = () =>
-            new Promise((resolve) => {
-                setTimeout(() => {
-                    resolve(`
---- Task List (Promise/Async) ---
-${tasks.map((t, i) => `${i + 1}. ${t}`).join("<br>")}
-----------------------------------
-                    `);
-                }, 1000);
-            });
+const handleTaskActions = (e) => {
+    const action = e.target.dataset.action
+    if (!action) return
 
-        // ===============================
-        // 3️⃣ Async/Await Version
-        // ===============================
-        const runAsyncVersion = async () => {
-            try {
-                output.innerHTML += `<h3>Async/Await Version</h3>`;
+    const li = e.target.closest("li")
 
-                output.innerHTML += `<p>${await addTaskPromise("Learn JS")}</p>`;
-                output.innerHTML += `<p>${await addTaskPromise("Practice Promises")}</p>`;
-                output.innerHTML += `<p>${await addTaskPromise("Build Project")}</p>`;
+    if (action === "delete") {
+        li.remove()
+    }
 
-                output.innerHTML += `<p>${await deleteTaskPromise("Practice Promises")}</p>`;
+    if (action === "complete") {
+        li.querySelector(".task-text").classList.toggle("completed")
+    }
+}
 
-                output.innerHTML += `<div>${await listTasksPromise()}</div>`;
-
-            } catch (error) {
-                output.innerHTML += `<p style="color:red;">Error: ${error.message}</p>`;
-            }
-        };
-
-        // ===============================
-        // Demonstrate Evolution
-        // ===============================
-        const runCallbackVersion = () => {
-            output.innerHTML += `<h3>Callback Version</h3>`;
-
-            addTaskCallback("Task A", (msg1) => {
-                output.innerHTML += `<p>${msg1}</p>`;
-
-                addTaskCallback("Task B", (msg2) => {
-                    output.innerHTML += `<p>${msg2}</p>`;
-
-                    listTasksCallback((list) => {
-                        output.innerHTML += `<div>${list}</div>`;
-                    });
-                });
-            });
-        };
-
-        // Run both versions
-        runCallbackVersion();
-
-        // Delay async version so output is clear
-        setTimeout(() => {
-            runAsyncVersion();
-        }, 4000);
-
-    </script>
+addBtn.addEventListener("click", addTask)
+taskList.addEventListener("click", handleTaskActions)
+</script>
 
 </body>
 </html>

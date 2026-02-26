@@ -1,82 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Weather Data Fetcher</title>
+    <title>Feedback Button</title>
+    <style>
+        body { font-family: Arial; text-align: center; margin-top: 100px; }
+        button { padding: 10px 20px; cursor: pointer; }
+        #message { margin-top: 20px; font-weight: bold; color: green; }
+    </style>
 </head>
 <body>
 
-    <h2>🌤 Weather Report</h2>
-    <button id="promiseBtn">Fetch (Promises)</button>
-    <button id="asyncBtn">Fetch (Async/Await)</button>
+<h2>Feedback Page</h2>
+<button id="feedbackBtn">Submit Feedback</button>
+<div id="message"></div>
 
-    <div id="output"></div>
+<script>
+const feedbackBtn = document.getElementById("feedbackBtn")
+const message = document.getElementById("message")
 
-    <script>
-        const outputDiv = document.getElementById("output");
+const showMessage = () => {
+    message.textContent = "✅ Thank you! Your feedback has been submitted."
+}
 
-        const latitude = 12.97;   // Bangalore
-        const longitude = 77.59;
-
-        const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
-
-        const fetchWeatherPromise = () => {
-
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Failed to fetch weather data");
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    displayWeather(data.current_weather, "Promise Version");
-                })
-                .catch(error => {
-                    showError(error.message);
-                });
-        };
-
-        const fetchWeatherAsync = async () => {
-            try {
-                const response = await fetch(url);
-
-                if (!response.ok) {
-                    throw new Error("Failed to fetch weather data");
-                }
-
-                const data = await response.json();
-                displayWeather(data.current_weather, "Async/Await Version");
-
-            } catch (error) {
-                showError(error.message);
-            }
-        };
-
-        const displayWeather = (weather, version) => {
-            outputDiv.innerHTML = `
-                <h3>${version}</h3>
-                <p><strong>Temperature:</strong> ${weather.temperature}°C</p>
-                <p><strong>Wind Speed:</strong> ${weather.windspeed} km/h</p>
-                <p><strong>Wind Direction:</strong> ${weather.winddirection}°</p>
-                <p><strong>Time:</strong> ${weather.time}</p>
-                <hr>
-            `;
-        };
-
-        const showError = (message) => {
-            outputDiv.innerHTML = `
-                <p style="color:red;"><strong>Error:</strong> ${message}</p>
-            `;
-        };
-
-        
-        document.getElementById("promiseBtn")
-            .addEventListener("click", fetchWeatherPromise);
-
-        document.getElementById("asyncBtn")
-            .addEventListener("click", fetchWeatherAsync);
-
-    </script>
+feedbackBtn.addEventListener("click", showMessage)
+</script>
 
 </body>
 </html>

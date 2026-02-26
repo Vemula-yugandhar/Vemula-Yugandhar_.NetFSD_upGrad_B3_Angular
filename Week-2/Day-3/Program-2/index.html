@@ -1,57 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Product Cart Summary</title>
+    <title>Async Task Manager</title>
 </head>
 <body>
 
-    <h2>🛒 Product Cart Invoice</h2>
-    <div id="output"></div>
+<h2>Task Manager</h2>
 
-    <script>
-        const cart = [
-            { name: "Laptop", price: 40000, quantity: 1 },
-            { name: "Mouse", price: 1000, quantity: 1 },
-            { name: "Keyboard", price: 2000, quantity: 1 }
-        ];
+<input type="text" id="taskInput" placeholder="Enter Task">
+<button id="addBtn">Add Task</button>
+<button id="deleteBtn">Delete Last Task</button>
+<button id="listBtn">List Tasks</button>
 
-        // Calculate total
-        const calculateTotal = (cartItems) =>
-            cartItems.reduce(
-                (total, product) => total + (product.price * product.quantity),
-                0
-            );
+<pre id="output"></pre>
 
-        // Generate invoice
-        const generateInvoice = (cartItems) => {
+<script type="module">
+let tasks = []
 
-            const itemsList = cartItems
-                .map(product => 
-                    `<p>
-                        <strong>${product.name}</strong> 
-                        (₹${product.price} × ${product.quantity}) 
-                        = ₹${product.price * product.quantity}
-                    </p>`
-                )
-                .join("");
+const output = document.getElementById("output")
 
-            const totalAmount = calculateTotal(cartItems);
+const simulateStoragePromise = (action, data) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            try {
+                action(data)
+                resolve(tasks)
+            } catch (err) {
+                reject(err)
+            }
+        }, 10)
+    })
+}
 
-            return `
-                <div>
-                    <h3>Invoice Details</h3>
-                    ${itemsList}
-                    <hr>
-                    <h3>Total Amount: ₹${totalAmount}</h3>
-                </div>
-            `;
-        };
+const addTask = (task) => tasks.push(task)
+const deleteTask = () => tasks.pop()
 
-        // Display in browser
-        const invoice = generateInvoice(cart);
-        document.getElementById("output").innerHTML = invoice;
+const formatTasks = (taskList) => `
+Task List:
+${taskList.length === 0 ? "No Tasks Found" : taskList.map((t, i) => `${i + 1}. ${t}`).join("\n")}
+`
 
-    </script>
+const addTaskAsync = async () => {
+    try {
+        const task = document.getElementById("taskInput").value
+        await simulateStoragePromise(addTask, task)
+        output.textContent = "Task Added"
+    } catch (err) {
+        output.textContent = `Error: ${err.message}`
+    }
+}
+
+const deleteTaskAsync = async () => {
+    try {
+        await simulateStoragePromise(deleteTask)
+        output.textContent = "Last Task Deleted"
+    } catch (err) {
+        output.textContent = `Error: ${err.message}`
+    }
+}
+
+const listTasksAsync = async () => {
+    try {
+        const list = await simulateStoragePromise(() => {})
+        output.textContent = formatTasks(list)
+    } catch (err) {
+        output.textContent = `Error: ${err.message}`
+    }
+}
+
+document.getElementById("addBtn").addEventListener("click", addTaskAsync)
+document.getElementById("deleteBtn").addEventListener("click", deleteTaskAsync)
+document.getElementById("listBtn").addEventListener("click", listTasksAsync)
+</script>
 
 </body>
 </html>
