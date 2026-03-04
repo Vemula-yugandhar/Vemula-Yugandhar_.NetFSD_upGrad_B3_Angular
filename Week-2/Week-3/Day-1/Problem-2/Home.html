@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FAQ Toggle</title>
+    
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            width: 600px;
+            margin: 40px auto;
+        }
+
+        .faq-container {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .question {
+            background-color: #f2f2f2;
+            padding: 12px;
+            margin: 5px 0;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .answer {
+            display: none;
+            padding: 10px;
+            background-color: #fafafa;
+            border-left: 3px solid #007BFF;
+            margin-bottom: 5px;
+        }
+
+        .active {
+            background-color: #007BFF;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="faq-container">
+        <div class="faq-item">
+            <div class="question">1. What is JavaScript?</div>
+            <div class="answer">JavaScript is a scripting language used to create dynamic web pages.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">2. What is jQuery?</div>
+            <div class="answer">jQuery is a fast and lightweight JavaScript library for DOM manipulation.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">3. What is slideToggle()?</div>
+            <div class="answer">slideToggle() shows or hides elements with a sliding animation.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">4. What is DOM?</div>
+            <div class="answer">DOM stands for Document Object Model. It represents HTML as objects.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">5. Why use jQuery?</div>
+            <div class="answer">jQuery simplifies JavaScript tasks like event handling and animations.</div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+
+            $(".question").click(function(){
+
+                // Toggle current answer
+                $(this).next(".answer").slideToggle(300);
+
+                // Toggle active class
+                $(this).toggleClass("active");
+
+                
+            });
+
+        });
+    </script>
+
+</body>
+</html>

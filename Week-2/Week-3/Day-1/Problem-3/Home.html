@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    img {
+        height: 150px;
+        width: 150px;
+    }
+    #images {
+        display: flex;
+        justify-content: space-evenly;
+        margin: 40px;
+        flex-wrap: wrap;
+    }
+    button {
+        text-align: center;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    h1 {
+        text-align: center;
+        color: green;
+        background-color: skyblue;
+        border-radius: 10px;
+        border: solid;
+
+    }
+</style>
+
+<body>
+    <h1>ELECTRONIC HUB</h1>
+    <div id="images">
+        <div style="text-align: center; background-color: skyblue; padding: 30px; border-radius: 10px; border: solid;">
+        <p><b>Laptop</b></p>
+        <img src="Laptop.png"/>
+        <br><br>
+        <button class="btn">Add to Cart</button>
+        <p id="p1"></p>
+        </div>
+        <div style="text-align: center; background-color: skyblue; padding: 30px; border-radius: 10px;border: solid;">
+        <p><b>Mobile</b></p>
+        <img src="Mobile.png"/>
+        <br><br>
+        <button class="btn">Add to Cart</button>
+        <p id="p1"></p>
+        </div>
+        <div style="text-align: center; background-color: skyblue; padding: 30px; border-radius: 10px; border: solid;">
+        <p><b>Tablet</b></p>
+        <img src="tab.png"/>
+        <br><br>
+        <button class="btn">Add to Cart</button>
+        <p id="p1"></p>
+        </div>
+        <div style="text-align: center; background-color: skyblue; padding: 30px; border-radius: 10px; border: solid;">
+        <p><b>Watch</b></p>
+        <img src="watch.png"/>
+        <br><br>
+        <button class="btn">Add to Cart</button>
+        <p id="p1"></p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+     $(document).ready(function() {
+        $(".btn").click(function() {
+            
+            //Disabling the button
+            $(this).prop("disabled", true)
+
+            //Adding to the cart
+             $(this).siblings("#p1").text("✔ Added to cart!");
+                    
+        });
+     });
+    </script>
+
+</body>
+</html>
