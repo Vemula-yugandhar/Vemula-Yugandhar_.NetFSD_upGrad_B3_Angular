@@ -170,7 +170,6 @@ CREATE TABLE Items (
     ItemName VARCHAR(100) NOT NULL
 );
 
-
 CREATE TABLE Inventory (
     ItemId INT PRIMARY KEY,
     StockQuantity INT NOT NULL,
