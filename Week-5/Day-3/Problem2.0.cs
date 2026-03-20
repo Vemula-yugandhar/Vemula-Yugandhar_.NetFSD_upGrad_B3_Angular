@@ -30,41 +30,55 @@ namespace Collections
             //Query 1
             //Write a LINQ query to search and display all products with category “FMCG”.
             Console.WriteLine("Query 1");
-            var result = products.Where(p => p.ProCategory == "FMCG").ToList();
-            GetList(products, result);
+            var result = (from p in products
+              where p.ProCategory == "FMCG"
+              select p).ToList();
 
 
             //Query 2
             //Write a LINQ query to search and display all products with category “Grain”.
             Console.WriteLine("Query 2");
-            result = products.Where(p => p.ProCategory == "Grain").ToList();
-            GetList(products, result);
+            result = (from p in products
+              where p.ProCategory == "Grain"
+              select p).ToList();
 
+            GetList(products, result);
 
             //Query 3
             //Write a LINQ query to sort products in ascending order by product code.
             Console.WriteLine("Query 3");
-            result = products.OrderBy(p => p.ProCode).ToList();
-            GetList(products, result);
+            var result = (from p in products
+              orderby p.ProCode ascending
+              select p).ToList();
+
+           GetList(products, result);
 
  
             //Query 4
             //Write a LINQ query to sort products in ascending order by product Category.
             Console.WriteLine("Query 4");
-            result = products.OrderBy(p => p.ProCategory).ToList();
+            result = (from p in products
+              orderby p.ProCategory ascending
+              select p).ToList();
+
             GetList(products, result);
 
             
             //Query 5
             //Write a LINQ query to sort products in ascending order by product Mrp.
-            Console.WriteLine("Query 5");
-            result = products.OrderBy(p => p.ProMrp).ToList();
+            result = (from p in products
+              orderby p.ProMrp ascending
+              select p).ToList();
+
             GetList(products, result);
 
             //Query 6
             //Write a LINQ query to sort products in descending order by product Mrp.
             Console.WriteLine("Query 6");
-            result = products.OrderByDescending(p => p.ProMrp).ToList();
+            result = (from p in products
+              orderby p.ProMrp descending
+              select p).ToList();
+
             GetList(products, result);
 
             //Query 7
@@ -76,6 +90,21 @@ namespace Collections
 
             //Query8
             //Write a LINQ query to display products group by product Mrp.
+            Console.WriteLine("Query 8");
+
+                result = (from p in products
+                            group p by p.ProMrp into g
+                            select g).ToList();
+
+                // Display
+                foreach (var group in result)
+                {
+                    Console.WriteLine($"MRP: {group.Key}");
+                    foreach (var item in group)
+                    {
+                        Console.WriteLine($"   {item.ProName} - {item.ProCategory}");
+                    }
+                }
 
             //Query 9
             //Write a LINQ query to display product detail with highest price in FMCG category.
@@ -125,8 +154,12 @@ namespace Collections
 
             //Query 14
             //Write a LINQ query to display whether all products are below Mrp Rs.30 or not.
+            Console.WriteLine("Query 14");
+            result = (from p in products
+                        where p.ProMrp >= 30
+                        select p).Any();
 
-
+            Console.WriteLine(!result);
 
 
         }
