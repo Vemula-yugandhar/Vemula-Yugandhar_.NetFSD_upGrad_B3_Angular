@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body align="center">
+    <h1>COURSE ENROLLMENT</h1>
+    <BR>
+     <form>
+        <fieldset>
+            <legend>ENROLL:</legend>
+        
+            <label>Name:</label>
+            <input type="text" id="usrName" name="usrName" required>
+        <br><br>
+        <label>Email:</label>
+        <input type="email" id="mail" name="mail">
+         <br><br>
+        
+        <label>Phone Number:</label>
+        <input type="tel" id="phone" name="phone">
+        <br><br>
+
+        <label for="course">Choose Course:</label>
+       
+        <input type="text" id="course" name="course" list="courses">
+        <br><br>
+        <label>Range:</label>
+        <input type="range">
+        <br>
+        <!--The <datalist> element provides a dropdown list of 
+            predefined options for an <input> field.-->
+        <datalist id="courses">
+        <option value="Java">
+        <option value="Python">
+        <option value=".NET">
+        <option value="Angular">
+        </datalist>
+
+        <br><br>
+         
+        <!--The <progress> element is used to show the progress of a task.
+            value → Current progress
+            max → Total value    -->
+        <label>Course Completion (1-100%):</label>
+        <progress value="40" max="100"></progress>
+
+        <br><br>
+
+        <!--The <meter> element is used to display a measurement within a known range.
+            value → Current value 
+            min → Minimum value 
+            max → Maximum value    -->
+        <label>Skill Level (1-10):</label>
+        <meter value="6" min="0" max="10"></meter>
+
+        <br><br>
+
+        
+
+        <input type="submit" value="Enroll">
+
+        <input type="reset" value="Reset">
+
+        </fieldset>
+     </form>   
+
+</body>
+</html>

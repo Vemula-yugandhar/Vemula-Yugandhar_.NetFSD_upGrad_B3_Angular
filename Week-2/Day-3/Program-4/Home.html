@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Theme Toggle Application</title>
+</head>
+<body>
+
+    <h2>Theme Toggle Application</h2>
+    <p>This is a simple blog content area.</p>
+    <button id="toggleBtn">Switch Theme</button>
+
+    <script>
+        const body = document.body;
+        const toggleBtn = document.getElementById("toggleBtn");
+
+        const applyTheme = (theme) => {
+            if (theme === "dark") {
+                body.style.backgroundColor = "#121212";
+                body.style.color = "#ffffff";
+                body.style.transition = "all 0.4s ease";
+                toggleBtn.textContent = "Switch to Light Mode ☀";
+            } else {
+                body.style.backgroundColor = "#ffffff";
+                body.style.color = "#000000";
+                body.style.transition = "all 0.4s ease";
+                toggleBtn.textContent = "Switch to Dark Mode 🌙";
+            }
+        };
+
+        const loadTheme = () => {
+            const savedTheme = localStorage.getItem("theme") || "light";
+            applyTheme(savedTheme);
+        };
+
+        const toggleTheme = () => {
+            const currentTheme = localStorage.getItem("theme") || "light";
+            const newTheme = currentTheme === "light" ? "dark" : "light";
+
+            localStorage.setItem("theme", newTheme);
+            applyTheme(newTheme);
+        };
+
+        toggleBtn.addEventListener("click", toggleTheme);
+
+        // Initialize on page load
+        loadTheme();
+
+    </script>
+
+</body>
+</html>

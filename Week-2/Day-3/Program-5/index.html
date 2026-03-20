@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic To-Do List</title>
+</head>
+<body>
+
+    <h2>📝 To-Do List</h2>
+
+    <input type="text" id="taskInput" placeholder="Enter new task">
+    <button id="addBtn">Add Task</button>
+
+    <ul id="taskList"></ul>
+
+    <script>
+        // Element Selection
+        const taskInput = document.getElementById("taskInput");
+        const addBtn = document.getElementById("addBtn");
+        const taskList = document.getElementById("taskList");
+
+        
+        // Create Task Element
+        const createTaskElement = (taskText) => {
+            const li = document.createElement("li");
+            li.innerHTML = `
+                <span class="task-text">${taskText}</span>
+                <button class="complete-btn">✔</button>
+                <button class="delete-btn">❌</button>
+            `;
+            return li;
+        };
+
+        // Add Task
+        const addTask = () => {
+            const taskText = taskInput.value.trim();
+
+            if (taskText === "") {
+                alert("Task cannot be empty!");
+                return;
+            }
+
+            const taskElement = createTaskElement(taskText);
+            taskList.appendChild(taskElement);
+
+            taskInput.value = "";
+        };
+
+        // Event Delegation (Important)
+
+        const handleTaskActions = (e) => {
+            const target = e.target;
+
+            // Delete Task
+            if (target.classList.contains("delete-btn")) {
+                target.parentElement.remove();
+            }
+
+            // Mark as Completed
+            if (target.classList.contains("complete-btn")) {
+                const taskText = target.parentElement.querySelector(".task-text");
+                taskText.style.textDecoration = "line-through";
+                taskText.style.color = "gray";
+            }
+        };
+
+        // Event Listeners
+
+        addBtn.addEventListener("click", addTask);
+
+        // Event Delegation: single listener on parent
+        taskList.addEventListener("click", handleTaskActions);
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+     body{
+    background-color: lightblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+   }
+
+   label {
+    color: black;
+   }
+  
+   #formfield {
+    margin: 30px;
+    background-color: lightblue;
+    border-radius: 10px;
+    padding: 20px;
+   }
+   #submit {
+    background-color: white;
+    padding: 5px;
+    border-radius: 10px;
+   }
+   div {
+    background-color: skyblue;
+    padding: 20px;
+    border-radius: 10px;
+   }
+   h3 {
+    font-size: 30px;
+   }

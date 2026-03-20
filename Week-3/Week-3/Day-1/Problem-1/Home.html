@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Feedback Form</title>
+</head>
+<body style="padding: 20px;">
+    
+    <h1>FEEDBACK FORM SUBMISSION</h1>
+    <label for="name">Enter Name:</label.>
+    <input type="text" id="name" name="name" placeholder="Name" required />
+    <br><br>
+    <label for="email">Enter Email:</label.>
+    <input type="text" id="email" name="email" placeholder="Email" required />
+    <br><br>
+    <label for="course">Course Rating</label>
+    <select>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+    </select>
+    <br><br>
+    <button id="btn">Submit</button>
+    <p id="p1"></p>
+
+
+    <script  src="https://code.jquery.com/jquery-4.0.0.js">		
+	</script>
+    <script>
+    $(document).ready(function () 
+    {
+           $("#btn").click(function()
+			{
+				$("#p1").text("Form Submission Succesfull....").css("color", "green");
+                $("input:text").val("");
+			});		
+    });
+    </script>
+</body>
+</html>l

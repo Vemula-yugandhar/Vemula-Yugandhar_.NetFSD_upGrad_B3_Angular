@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            padding: 30px;
+            background-color: lightblue;
+        }
+        #validate {
+              border: solid;
+              border-radius: 5px;
+              padding: 20px;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              height: 200px;
+              width: 400px;
+              background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="validate">
+
+    <label for="username">Enter Name: </label>
+    <input type="text" id="username" name="username" required class="data">
+    <br><br>
+
+    <label for="email">Enter Email: </label>
+    <input type="email" id="email" name="email" class="data">
+    <br><br>
+
+    <label for="age">Enter Age: </label>
+    <input type="number" id="age" name="age" class="data">
+    <br><br>
+
+    <input type="submit" value="Save" onclick="validate()">
+    <input type="submit" value="Retrive" onclick="get()">
+    </div>
+
+    <script>
+        
+        function validate() {
+             
+            let a = document.getElementById("age");
+             
+            if(a.value <= 18) {
+               alert("Age should be >= 18")
+            }
+            else {
+                 
+                let save = document.querySelectorAll(".data");
+
+                let values = [];
+
+                for (let i = 0; i < save.length; i++) {
+                values.push(save[i].value);
+                }
+
+                sessionStorage.setItem("data", JSON.stringify(values));
+
+                alert("Data Saved");
+            }
+        }
+
+
+        function get() {
+        let note = sessionStorage.getItem("data");
+        alert("User data : " + note)
+       }
+
+         
+        let isFirstTime = true;
+        document.getElementById("username").addEventListener("change", function() {
+
+            if (isFirstTime) {
+            isFirstTime = false;   // Skip first execution
+            return;
+            }
+
+            alert("Changed "+ name +"to:" + this.value);
+        });
+
+
+        
+
+    </script>
+
+</body>
+</html>

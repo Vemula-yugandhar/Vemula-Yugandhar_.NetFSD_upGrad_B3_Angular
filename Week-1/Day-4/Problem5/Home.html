@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Analysis</title>
+</head>
+<body>
+    <h1>NUMBER ANALYSIS TOOL....</h1>
+    <script>
+        let number = prompt("Enter Number");
+
+        //Positve or Negative Number
+        let res = number >= 0 ? "Positive Number" : "Negative Number";
+    
+        console.log(res);
+
+        //Even or Odd Number
+        if (number % 2 == 0) {
+            console.log("Even Number")
+        }
+        else {
+            console.log("Odd Number")
+        }
+        
+        let i=1;
+        if(res === "Positive Number") {
+
+        while(i <= number) {
+           console.log(i);
+           i++;
+        }
+
+        }
+        else {
+            while(number < i) {
+                console.log(number);
+                number++;
+            }
+        }
+
+    </script>
+</body>
+</html>

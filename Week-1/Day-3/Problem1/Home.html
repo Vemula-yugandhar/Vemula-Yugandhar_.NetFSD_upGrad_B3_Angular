@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <br><br>
+    <div>
+        <h3 align="center"><b>Registration Form</b></h3>
+     <form align="center" id="formfield">
+        <label><b>USER NAME:</b></label>
+        <input type="text" id="userName" name="userName" required autofocus placeholder="Enter your name">
+         <br><br>
+        <label><b>EMAIL:</b></label>
+        <input type="email" id="email" name="email" placeholder="Enter email">
+        <br><br>
+        <label><b>PHONE NUMBER;</b></label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="Enter mobile number">
+         <br><br>
+        <label><b>AGE:</b></label>
+        <input type="number" id="age" name="age" min="18" max="45" placeholder="Enter age">
+         <br><br>
+        <label><b>DATE:</b></label>
+        <input type="date" id="date" name="date" placeholder="Enter age">
+         <br><br>
+        <input type="submit" value="Register" id="submit">
+        
+     </form>
+    </div>
+</body>
+</html>
