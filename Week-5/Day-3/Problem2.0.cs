@@ -84,8 +84,19 @@ namespace Collections
             //Query 7
             //Write a LINQ query to display products group by product Category.
             Console.WriteLine("Query 7");
-            result = products.GroupBy(p => p.ProCategory);
-            GetList(products, result);
+            result = (from p in products
+              group p by p.ProCategory into g
+              select g).ToList();
+
+            // Display
+            foreach (var group in result)
+            {
+                Console.WriteLine($"Category: {group.Key}");
+                foreach (var item in group)
+                {
+                    Console.WriteLine($"   {item.ProName} - {item.ProMrp}");
+                }
+            }
 
 
             //Query8
