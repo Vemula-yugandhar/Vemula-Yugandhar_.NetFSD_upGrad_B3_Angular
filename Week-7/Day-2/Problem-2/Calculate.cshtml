@@ -1,0 +1,24 @@
+<h2>Simple Calculator</h2>
+
+<form method="post" action="Calculate">
+    <label>Enter Number 1:</label>
+    <input type="number" name="n1" required />
+    <br /><br />
+
+    <label>Enter Number 2:</label>
+    <input type="number" name="n2" required />
+    <br /><br />
+
+    <label>Select Operation:</label>
+    <select name="operation">
+        <option value="Add">Add</option>
+        <option value="Sub">Sub</option>
+        <option value="Mul">Mul</option>
+        <option value="Div">Div</option>
+    </select>
+    <br /><br />
+
+    <button type="submit">Submit</button>
+</form>
+
+<h4>Result: @ViewBag.Result</h4>

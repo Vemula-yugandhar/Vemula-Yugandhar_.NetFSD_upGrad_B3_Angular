@@ -1,0 +1,28 @@
+@model Product
+
+
+
+<form method="post"  asp-action="AddProducts">
+
+    <div class="form-group">
+        <label asp-for="ProductName" class="form-label"></label>
+        <input asp-for="ProductName" class="form-control" />
+       
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Price" class="form-label"></label>
+        <input asp-for="Price" class="form-control" />
+       
+    </div>
+ 
+    <div class="form-group">
+        <label asp-for="Quantity"></label>
+        <input asp-for="Quantity" class="form-control" />
+    </div>
+    
+
+    <button type="submit" class="btn btn-success">Create</button>
+    <a asp-action="ShowProducts" class="btn btn-secondary">Back to List</a> 
+    
+</form>
