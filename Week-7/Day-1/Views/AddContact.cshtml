@@ -1,0 +1,56 @@
+@model ContactInfo
+
+<h2>Add Contact</h2>
+<hr/>
+
+
+<form method="post"  asp-action="AddContact">
+
+    <div class="form-group">
+        <label asp-for="ContactId" class="form-label"></label>
+        <input asp-for="ContactId" class="form-control" />
+        <span style="color: red" asp-validation-for="ContactId"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FirstName" class="form-label"></label>
+        <input asp-for="FirstName" class="form-control" />
+        <span style="color: red" asp-validation-for="FirstName"></span>
+    </div>
+ 
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" class="form-control" />
+        <span style="color: red"  asp-validation-for="LastName"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CompanyName"></label>
+        <input asp-for="CompanyName" class="form-control" />
+        <span style="color: red"  asp-validation-for="CompanyName"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="EmailId"></label>
+        <input asp-for="EmailId" class="form-control" />
+        <span style="color: red"  asp-validation-for="EmailId"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PhoneNumber"></label>
+        <input asp-for="PhoneNumber" class="form-control" />
+        <span style="color: red" asp-validation-for="PhoneNumber"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Designation"></label>
+        <input asp-for="Designation" class="form-control" />
+        <span style="color: red"  asp-validation-for="Designation"></span>
+    </div>
+
+
+
+    <button type="submit" class="btn btn-success">Add</button>
+    <a asp-action="Contacts" class="btn btn-secondary">Back to List</a> 
+    
+</form>
+
+ 

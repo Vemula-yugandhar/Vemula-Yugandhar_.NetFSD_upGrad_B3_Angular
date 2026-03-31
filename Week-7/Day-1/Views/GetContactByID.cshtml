@@ -1,0 +1,16 @@
+@model ContactInfo
+
+<form method="post" asp-action="Details">
+
+    <div class="form-group">
+        <label asp-for="ContactId" class="form-label"></label>
+        <input asp-for="ContactId" class="form-control" />
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-success">GetDetails</button>
+</form>
+</br>
+
+<a class="btn btn-secondary" asp-action="Contacts">Back To List</a>
