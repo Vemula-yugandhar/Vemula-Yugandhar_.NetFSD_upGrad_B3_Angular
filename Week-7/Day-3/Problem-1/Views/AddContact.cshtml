@@ -1,0 +1,36 @@
+@model List<ContactManagementApp.Models.ContactInfo>
+
+<h2>All Contacts</h2>
+
+<p>
+    <a asp-action="AddContact">Add New Contact</a> |
+    <a asp-action="GetContactById">Search Contact By ID</a>
+</p>
+
+<table border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>Contact ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Company Name</th>
+            <th>Email</th>
+            <th>Mobile No</th>
+            <th>Designation</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var contact in Model)
+        {
+            <tr>
+                <td>@contact.ContactId</td>
+                <td>@contact.FirstName</td>
+                <td>@contact.LastName</td>
+                <td>@contact.CompanyName</td>
+                <td>@contact.EmailId</td>
+                <td>@contact.MobileNo</td>
+                <td>@contact.Designation</td>
+            </tr>
+        }
+    </tbody>
+</table>

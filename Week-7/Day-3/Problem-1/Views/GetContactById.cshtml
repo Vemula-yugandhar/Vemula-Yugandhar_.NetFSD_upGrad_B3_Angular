@@ -1,0 +1,26 @@
+@model ContactManagementApp.Models.ContactInfo
+
+<h2>Search Contact By ID</h2>
+
+<form asp-action="GetContactById" method="post">
+    <label>Enter Contact ID:</label>
+    <input type="number" name="id" required />
+    <button type="submit">Search</button>
+</form>
+
+@if (Model != null)
+{
+    <hr />
+    <h3>Contact Details</h3>
+    <p><b>Contact ID:</b> @Model.ContactId</p>
+    <p><b>First Name:</b> @Model.FirstName</p>
+    <p><b>Last Name:</b> @Model.LastName</p>
+    <p><b>Company Name:</b> @Model.CompanyName</p>
+    <p><b>Email ID:</b> @Model.EmailId</p>
+    <p><b>Mobile No:</b> @Model.MobileNo</p>
+    <p><b>Designation:</b> @Model.Designation</p>
+}
+else if (Context.Request.Method == "POST")
+{
+    <p style="color:red;">Contact not found.</p>
+}

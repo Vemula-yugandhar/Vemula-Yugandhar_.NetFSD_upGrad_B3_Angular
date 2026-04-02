@@ -1,0 +1,29 @@
+@model MovieCatalogApp.Models.Movie
+
+<h2>Add Movie</h2>
+
+<form asp-action="Create" method="post">
+    <label>Title:</label>
+    <input asp-for="Title" />
+    <br /><br />
+
+    <label>Genre:</label>
+    <input asp-for="Genre" />
+    <br /><br />
+
+    <label>Release Date:</label>
+    <input asp-for="ReleaseDate" type="date" />
+    <br /><br />
+
+    <label>Price:</label>
+    <input asp-for="Price" />
+    <br /><br />
+
+    <label>Rating:</label>
+    <input asp-for="Rating" />
+    <br /><br />
+
+    <button type="submit">Save</button>
+</form>
+
+<a asp-action="Index">Back to List</a>

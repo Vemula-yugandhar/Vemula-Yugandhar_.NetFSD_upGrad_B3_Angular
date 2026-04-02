@@ -1,0 +1,11 @@
+@model MovieCatalogApp.Models.Movie
+
+<h2>Movie Details</h2>
+
+<p><b>Title:</b> @Model.Title</p>
+<p><b>Genre:</b> @Model.Genre</p>
+<p><b>Release Date:</b> @Model.ReleaseDate.ToShortDateString()</p>
+<p><b>Price:</b> @Model.Price</p>
+<p><b>Rating:</b> @Model.Rating</p>
+
+<a asp-action="Index">Back to List</a>

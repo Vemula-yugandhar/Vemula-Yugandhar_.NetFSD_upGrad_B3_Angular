@@ -1,0 +1,31 @@
+@model MovieCatalogApp.Models.Movie
+
+<h2>Edit Movie</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <label>Title:</label>
+    <input asp-for="Title" />
+    <br /><br />
+
+    <label>Genre:</label>
+    <input asp-for="Genre" />
+    <br /><br />
+
+    <label>Release Date:</label>
+    <input asp-for="ReleaseDate" type="date" />
+    <br /><br />
+
+    <label>Price:</label>
+    <input asp-for="Price" />
+    <br /><br />
+
+    <label>Rating:</label>
+    <input asp-for="Rating" />
+    <br /><br />
+
+    <button type="submit">Update</button>
+</form>
+
+<a asp-action="Index">Back to List</a>
