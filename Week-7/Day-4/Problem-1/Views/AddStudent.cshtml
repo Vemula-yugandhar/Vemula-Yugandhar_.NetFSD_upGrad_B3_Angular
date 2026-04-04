@@ -1,0 +1,27 @@
+@model Entity_FramesWork_Student_Course_System.Models.Student
+
+<h2>Add Student</h2>
+
+<form asp-action="AddStudent" method="post">
+    <div>
+        <label>Student Name:</label>
+        <input asp-for="StudentName" class="form-control" />
+    </div>
+    <br />
+
+    <div>
+        <label>Select Course:</label>
+        <select asp-for="CourseId" asp-items="ViewBag.Courses" class="form-control">
+            <option value="">-- Select Course --</option>
+            <option value=1>Java</option>
+            <option value=2>Python</option>
+            <option value=3>.Net</option>
+        </select>
+    </div>
+    <br />
+
+    <button type="submit" class="btn btn-primary">Add Student</button>
+</form>
+
+<br />
+<a asp-action="GetStudents">Back to Students List</a>

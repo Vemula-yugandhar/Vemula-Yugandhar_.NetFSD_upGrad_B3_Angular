@@ -1,0 +1,22 @@
+using Microsoft.EntityFrameworkCore;
+
+namespace Entity_FramesWork_Student_Course_System.Models
+{
+    public class ApplicationDbContext : DbContext
+    {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {
+        }
+        public DbSet<Course> Courses { get; set; }
+
+        public DbSet<Student> Students { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Student>()
+                        .HasOne(s => s.Course)
+                        .WithMany(c => c.Students)
+                        .HasForeignKey(s => s.CourseId);
+        }
+    }
+}
