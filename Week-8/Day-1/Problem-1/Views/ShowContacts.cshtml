@@ -1,0 +1,48 @@
+@model IEnumerable<ContactInfo>
+
+@{
+    ViewData["Title"] = "Contacts";
+}
+
+<h2>Contact List</h2>
+
+<p>
+    <a asp-action="AddContact" class="btn btn-primary">Add New Contact</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ContactId</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Designation</th>
+            <th>Company</th>
+            <th>Department</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ContactId</td>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.EmailId</td>
+                <td>@item.MobileNo</td>
+                <td>@item.Designation</td>
+                <td>@item.CompanyName</td>
+                <td>@item.DepartmentName</td>
+                <td>
+                    <a asp-action="GetContactById" asp-route-id="@item.ContactId" class="btn btn-info btn-sm">Details</a>
+                    <a asp-action="EditContact" asp-route-id="@item.ContactId" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-action="DeleteContact" asp-route-id="@item.ContactId" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
